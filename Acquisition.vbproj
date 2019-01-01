@@ -52,6 +52,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -95,15 +97,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atalasoft.DotTwain">
-      <Name>Atalasoft.DotTwain</Name>
-      <HintPath>C:\Program Files\Atalasoft\DotImage 11.0\bin\4.5.2\x86\Atalasoft.DotTwain.dll</HintPath>
-      <HintPath>C:\Program Files (x86)\Atalasoft\DotImage 11.0\bin\4.5.2\x86\Atalasoft.DotTwain.dll</HintPath>
+    <Reference Include="Atalasoft.DotTwain, Version=11.1.0.336, Culture=neutral, PublicKeyToken=2b02b46f7326f73b, processorArchitecture=x86">
+      <HintPath>packages\Atalasoft.DotTwain.x86.11.1.0.1336\lib\net452\Atalasoft.DotTwain.dll</HintPath>
     </Reference>
-    <Reference Include="Atalasoft.Shared">
-      <Name>Atalasoft.Shared</Name>
-      <HintPath>C:\Program Files\Atalasoft\DotImage 11.0\bin\4.5.2\x86\Atalasoft.Shared.dll</HintPath>
-      <HintPath>C:\Program Files (x86)\Atalasoft\DotImage 11.0\bin\4.5.2\x86\Atalasoft.Shared.dll</HintPath>
+    <Reference Include="Atalasoft.Shared, Version=11.1.0.336, Culture=neutral, PublicKeyToken=2b02b46f7326f73b, processorArchitecture=MSIL">
+      <HintPath>packages\Atalasoft.Shared.11.1.0.1336\lib\net452\Atalasoft.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -127,6 +125,7 @@
   <ItemGroup>
     <Content Include="App.ico" />
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Resources\dlgbmp.bmp" />
     <Compile Include="AboutDialog.Designer.vb">
       <DependentUpon>AboutDialog.vb</DependentUpon>
@@ -220,4 +219,11 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="packages\Atalasoft.DotTwain.x86.11.1.0.1336\build\Atalasoft.DotTwain.x86.targets" Condition="Exists('packages\Atalasoft.DotTwain.x86.11.1.0.1336\build\Atalasoft.DotTwain.x86.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Atalasoft.DotTwain.x86.11.1.0.1336\build\Atalasoft.DotTwain.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Atalasoft.DotTwain.x86.11.1.0.1336\build\Atalasoft.DotTwain.x86.targets'))" />
+  </Target>
 </Project>
